@@ -1,0 +1,13 @@
+{
+  "name": "advent2024",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aoc-copilot": "^1.6.3",
+    "typescript": "^5.7.2"
+  }
+}
