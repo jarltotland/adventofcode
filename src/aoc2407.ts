@@ -1,4 +1,4 @@
-import { NotImplemented, run } from 'aoc-copilot';
+import { run } from 'aoc-copilot';
 
 async function solve(
   inputs: string[], // Contents of the example or actual inputs
@@ -13,11 +13,10 @@ async function solve(
     const vals = input.split(': ')[1].split(' ').map(Number);
     let match = 0;
 
-    const ops = await allOpsCombinations(part === 1 ? '+*' : 'i+*', vals.length - 1);
+    const ops = await allOpsCombinations(part === 1 ? '+*' : '+*|', vals.length - 1);
     for (let op in ops) {
       let sum = vals[0];
       let str = vals[0].toString();
-      //console.log(`${res}: ${vals.join(' ')} - ${ops[op]}`);
       for (let i = 1; i < vals.length; i++) {
         switch (ops[op][i - 1]) {
           case '+':
@@ -28,7 +27,7 @@ async function solve(
             sum *= vals[i];
             str += `*${vals[i]}`;
             break;
-          case 'i':
+          case '|':
             sum = Number(sum.toString() + vals[i].toString());
             str += vals[i].toString();
             break;
@@ -53,7 +52,6 @@ async function allOpsCombinations(ops: string, len: number): Promise<string[]> {
   let result : string[] = [];
   const n = ops.length;
   for (let i = 0; i < n**len; i++) {
-    // create a string that represents i in base n
     let s = '';
     let j = i;
     for (let k = 0; k < len; k++) {
@@ -62,9 +60,7 @@ async function allOpsCombinations(ops: string, len: number): Promise<string[]> {
     }
     result.push(s);
   }
-  //console.log(result);
   return result;
 }
-
 
 run(__filename, solve);
